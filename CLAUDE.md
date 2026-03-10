@@ -44,8 +44,11 @@ GLEAP_API_KEY=<key> node gleap-analyzer/scripts/fetch-gleap-card.js <ticketId> [
 GLEAP_API_KEY=<key> node gleap-responder/scripts/post-gleap-note.js <ticketId> <projectId> <content-file.md>
 ```
 
-When installed as a skill, scripts run from the consumer project root via:
+When installed as a skill (local or global), scripts are resolved dynamically:
 ```bash
-node .claude/skills/gleap-analyzer/gleap-analyzer/scripts/fetch-gleap-card.js <ticketId> <projectId>
-node .claude/skills/gleap-responder/scripts/post-gleap-note.js <ticketId> <projectId> <file>
+# fetch-gleap-card.js (resolve from local or global .claude/skills)
+GLEAP_FETCH_SCRIPT=$(find "$HOME/.claude/skills" ".claude/skills" -name "fetch-gleap-card.js" -path "*/gleap-analyzer/scripts/*" 2>/dev/null | head -1) && node "$GLEAP_FETCH_SCRIPT" <ticketId> <projectId>
+
+# post-gleap-note.js (resolve from local or global .claude/skills)
+GLEAP_POST_SCRIPT=$(find "$HOME/.claude/skills" ".claude/skills" -name "post-gleap-note.js" -path "*/gleap-responder/scripts/*" 2>/dev/null | head -1) && node "$GLEAP_POST_SCRIPT" <ticketId> <projectId> <file>
 ```
