@@ -1,11 +1,24 @@
 # gleap-analyzer
 
-Claude Code skill for fetching and analyzing Gleap support cards as an N2 support analyst.
+Claude Code skills for fetching, analyzing, and responding to Gleap support cards as an N2 support analyst.
+
+## Skills
+
+| Skill | Description |
+|-------|-------------|
+| `gleap-analyzer` | Fetches and analyzes Gleap cards, producing a structured N2 analysis |
+| `gleap-responder` | Posts a structured investigation report (relatório) as an internal note on the Gleap card |
 
 ## Installation
 
 ```bash
 npx skills add LeoFalco/gleap-analyzer -g -y
+```
+
+## Updating
+
+```bash
+npx skills update LeoFalco/gleap-analyzer -g -y
 ```
 
 ## Setup
@@ -43,6 +56,21 @@ The analysis includes:
 - **Análise de Causa Raiz** — root cause investigation
 - **Situação Atual** — current status and blockers
 - **Próximos Passos Sugeridos** — actionable next steps
+
+### gleap-responder
+
+After analyzing a card, trigger the responder by asking Claude Code to:
+
+- "respond to the gleap card"
+- "post a note on the card"
+- "send the relatório"
+
+The skill will:
+
+1. Gather investigation findings from the current conversation
+2. Generate a structured report (Problema reportado → Causas → O que foi feito → Situação atual)
+3. Show the report for your approval
+4. Post it as an internal note on the Gleap card via the API
 
 ## License
 
