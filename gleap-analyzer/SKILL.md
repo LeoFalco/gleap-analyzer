@@ -23,10 +23,10 @@ Extract IDs from URL:
 
 ### 2. Fetch card data
 
-Run the fetch script from the project root:
+Run the fetch script. It may be installed locally or globally, so resolve the path first:
 
 ```bash
-node .claude/skills/gleap-analyzer/gleap-analyzer/scripts/fetch-gleap-card.js <ticketId> <projectId>
+GLEAP_FETCH_SCRIPT=$(find "$HOME/.claude/skills" ".claude/skills" -name "fetch-gleap-card.js" -path "*/gleap-analyzer/scripts/*" 2>/dev/null | head -1) && node "$GLEAP_FETCH_SCRIPT" <ticketId> <projectId>
 ```
 
 This outputs a `gleap-card-<ticketId>.json` file in the current directory.

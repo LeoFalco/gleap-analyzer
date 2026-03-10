@@ -83,10 +83,10 @@ Show the generated report to the user and ask for approval before posting.
 After user approval:
 
 1. Save the report to a temporary file `gleap-note-{ticketId}.md`
-2. Run the post script:
+2. Run the post script. It may be installed locally or globally, so resolve the path first:
 
 ```bash
-node .claude/skills/gleap-responder/scripts/post-gleap-note.js <ticketId> <projectId> gleap-note-{ticketId}.md
+GLEAP_POST_SCRIPT=$(find "$HOME/.claude/skills" ".claude/skills" -name "post-gleap-note.js" -path "*/gleap-responder/scripts/*" 2>/dev/null | head -1) && node "$GLEAP_POST_SCRIPT" <ticketId> <projectId> gleap-note-{ticketId}.md
 ```
 
 3. Delete the temporary file after successful posting
